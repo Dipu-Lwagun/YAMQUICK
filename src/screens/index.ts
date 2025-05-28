@@ -1,3 +1,4 @@
-import HomeScreen from "./home";
+import HomeScreen from './home';
+import RecommendScreen from './RecommendScreen';
 
-export {HomeScreen};
+export {HomeScreen, RecommendScreen};

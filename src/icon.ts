@@ -1,5 +1,7 @@
+import {ICHome} from './assets/image';
+
 export const icon = {
-  home: require('./assets/image/logo/home.png'),
+  home: ICHome,
   manu: require('./assets/image/logo/menu.png'),
   favorite: require('./assets/image/logo/heart.png'),
   orderlist: require('./assets/image/logo/order.png'),

@@ -1,12 +1,12 @@
-import { StyleSheet, Image, ImageSourcePropType } from 'react-native';
+import {StyleSheet, Image, ImageSourcePropType} from 'react-native';
 import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from '../screens/home';
 import Menu from '../screens/menu';
 import Favorites from '../screens/favorites';
 import Help from '../screens/help';
-import { icon } from '../icon';
-import { Colors } from '../colors';
+import {icon} from '../icon';
+import {Colors} from '../colors';
 import order from '../screens/order';
 
 type TabIconProps = {
@@ -19,14 +19,22 @@ const Tab = createBottomTabNavigator();
 
 const TabNavigation: React.FC = () => {
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false,tabBarStyle:{backgroundColor:Colors.orange } }}>
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+        tabBarStyle: {backgroundColor: Colors.orange},
+        tabBarShowLabel: false,
+      }}>
       <Tab.Screen
         name="Home"
         component={Home}
         options={{
           title: 'Home',
-          tabBarIcon: ({ focused }: TabIconProps) => (
-            <Image source={icon.home as ImageSourcePropType} style={styles.iconimg} />
+          tabBarIcon: ({focused}: TabIconProps) => (
+            <Image
+              source={icon.home as ImageSourcePropType}
+              style={styles.iconimg}
+            />
           ),
         }}
       />
@@ -35,8 +43,11 @@ const TabNavigation: React.FC = () => {
         component={Menu}
         options={{
           title: 'Menu',
-          tabBarIcon: ({ focused }: TabIconProps) => (
-            <Image source={icon.manu as ImageSourcePropType} style={styles.iconimg} />
+          tabBarIcon: ({focused}: TabIconProps) => (
+            <Image
+              source={icon.manu as ImageSourcePropType}
+              style={styles.iconimg}
+            />
           ),
         }}
       />
@@ -45,8 +56,11 @@ const TabNavigation: React.FC = () => {
         component={Favorites}
         options={{
           title: 'Favorites',
-          tabBarIcon: ({ focused }: TabIconProps) => (
-            <Image source={icon.favorite as ImageSourcePropType} style={styles.iconimg} />
+          tabBarIcon: ({focused}: TabIconProps) => (
+            <Image
+              source={icon.favorite as ImageSourcePropType}
+              style={styles.iconimg}
+            />
           ),
         }}
       />
@@ -55,8 +69,11 @@ const TabNavigation: React.FC = () => {
         component={order}
         options={{
           title: 'Order',
-          tabBarIcon: ({ focused }: TabIconProps) => (
-            <Image source={icon.orderlist as ImageSourcePropType} style={styles.iconimg} />
+          tabBarIcon: ({focused}: TabIconProps) => (
+            <Image
+              source={icon.orderlist as ImageSourcePropType}
+              style={styles.iconimg}
+            />
           ),
         }}
       />
@@ -65,8 +82,11 @@ const TabNavigation: React.FC = () => {
         component={Help}
         options={{
           title: 'Help',
-          tabBarIcon: ({ focused }: TabIconProps) => (
-            <Image source={icon.help as ImageSourcePropType} style={styles.iconimg} />
+          tabBarIcon: ({focused}: TabIconProps) => (
+            <Image
+              source={icon.help as ImageSourcePropType}
+              style={styles.iconimg}
+            />
           ),
         }}
       />
