@@ -45,7 +45,7 @@ const TabNavigation: React.FC = () => {
           title: 'Menu',
           tabBarIcon: ({focused}: TabIconProps) => (
             <Image
-              source={icon.manu as ImageSourcePropType}
+              source={icon.Manu as ImageSourcePropType}
               style={styles.iconimg}
             />
           ),
@@ -58,7 +58,7 @@ const TabNavigation: React.FC = () => {
           title: 'Favorites',
           tabBarIcon: ({focused}: TabIconProps) => (
             <Image
-              source={icon.favorite as ImageSourcePropType}
+              source={icon.Favorite as ImageSourcePropType}
               style={styles.iconimg}
             />
           ),
@@ -71,7 +71,7 @@ const TabNavigation: React.FC = () => {
           title: 'Order',
           tabBarIcon: ({focused}: TabIconProps) => (
             <Image
-              source={icon.orderlist as ImageSourcePropType}
+              source={icon.Order as ImageSourcePropType}
               style={styles.iconimg}
             />
           ),
@@ -84,7 +84,7 @@ const TabNavigation: React.FC = () => {
           title: 'Help',
           tabBarIcon: ({focused}: TabIconProps) => (
             <Image
-              source={icon.help as ImageSourcePropType}
+              source={icon.Help as ImageSourcePropType}
               style={styles.iconimg}
             />
           ),

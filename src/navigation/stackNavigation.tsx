@@ -7,7 +7,7 @@ import Login from '../screens/Login';
 import Signup from '../screens/Signup';
 import TabNavigation from './tabNavigation';
 import Firstscreen from '../screens/Firstscreen';
-import {RecommendScreen, Home} from '../screens';
+import {RecommendScreen} from '../screens';
 
 const Stack = createNativeStackNavigator();
 

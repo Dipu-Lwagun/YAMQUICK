@@ -23,7 +23,7 @@ const catagore = [
   {
     id: 1,
     title: 'Snack',
-    logo: icon.Snacks,
+    logo: icon.Snack,
   },
   {
     id: 2,
@@ -33,7 +33,7 @@ const catagore = [
   {
     id: 3,
     title: 'Vegan',
-    logo: icon.Vegan,
+    logo: icon.Vagen,
   },
   {
     id: 4,
@@ -90,13 +90,13 @@ const Home = () => {
 
           <View style={styles.headiconcont}>
             <View style={styles.boxcont}>
-              <Image source={icon.cart} />
+              <Image source={icon.Cart} />
             </View>
             <View style={styles.boxcont}>
-              <Image source={icon.notification} />
+              <Image source={icon.Notification} />
             </View>
             <View style={styles.boxcont}>
-              <Image source={icon.profile} />
+              <Image source={icon.Profile} />
             </View>
           </View>
         </View>

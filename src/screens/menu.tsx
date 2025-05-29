@@ -46,22 +46,36 @@ const DrinksTabView = () => {
 const tabData = [
   {
     id: 1,
+    title: 'Snacks',
+    icon: icon.Snack,
     tab: <SnacksTabView />,
   },
   {
     id: 2,
+    title: 'Meal',
+    icon: icon.Meals,
+
     tab: <MealTabView />,
   },
   {
     id: 3,
+
+    title: 'Vegan',
+    icon: icon.Vagen,
+
     tab: <VeganTabView />,
   },
   {
     id: 4,
+    title: 'Dessert',
+    icon: icon.Desserts,
     tab: <DessertTabView />,
   },
   {
     id: 5,
+    title: 'Drinks',
+    icon: icon.Drinks,
+
     tab: <DrinksTabView />,
   },
 ];
@@ -81,13 +95,13 @@ const Menu = () => {
 
           <View style={styles.headiconcont}>
             <View style={styles.boxcont}>
-              <Image source={icon.cart} />
+              <Image source={icon.Cart} />
             </View>
             <View style={styles.boxcont}>
-              <Image source={icon.notification} />
+              <Image source={icon.Notification} />
             </View>
             <View style={styles.boxcont}>
-              <Image source={icon.profile} />
+              <Image source={icon.Profile} />
             </View>
           </View>
         </View>
@@ -129,9 +143,16 @@ const Menu = () => {
                   }}>
                   <Container
                     color={Colors.yellow2}
-                    style={{width: 49, height: 62, borderRadius: 30}}
-                  />
-                  <Text>{item.id}</Text>
+                    style={{
+                      width: 49,
+                      height: 62,
+                      borderRadius: 30,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                    <Image source={item.icon} />
+                  </Container>
+                  <Text>{item.title}</Text>
                 </Container>
               </Pressable>
             );
