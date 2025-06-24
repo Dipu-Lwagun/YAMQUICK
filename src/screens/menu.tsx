@@ -13,14 +13,15 @@ import {icon} from '../icon';
 import {Colors} from '../colors';
 import {Container} from '../components';
 import SnacksTabView from './MealScreen/menu-tabs/SnacksTabView';
+import MealTabView from './MealScreen/menu-tabs/MealTabView';
 
-const MealTabView = () => {
-  return (
-    <Container>
-      <Text style={{fontSize: 50}}>Meal Tab VIEW</Text>
-    </Container>
-  );
-};
+// const MealTabView = () => {
+//   return (
+//     <Container>
+//       <Text style={{fontSize: 50}}>Meal Tab VIEW</Text>
+//     </Container>
+//   );
+// };
 const VeganTabView = () => {
   return (
     <Container>

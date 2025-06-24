@@ -26,7 +26,7 @@ const TabNavigation: React.FC = () => {
         tabBarShowLabel: false,
       }}>
       <Tab.Screen
-        name="Home"
+        name="login"
         component={Home}
         options={{
           title: 'Home',
@@ -38,6 +38,7 @@ const TabNavigation: React.FC = () => {
           ),
         }}
       />
+
       <Tab.Screen
         name="Menu"
         component={Menu}

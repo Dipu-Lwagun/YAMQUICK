@@ -20,7 +20,7 @@ const StackNavigation = () => {
         }}>
         {/* <Stack.Screen
           name="firstpage"
-          component={Firstscreen}
+          component={Login}
           options={{headerShown: false}}
         /> */}
         {/* <Stack.Screen
