@@ -18,6 +18,7 @@ import {icon} from '../icon';
 import {Colors} from '../colors';
 import {BC1} from '../assets/image';
 import {useNavigation} from '@react-navigation/native';
+import Cart from './Carts/Cart';
 
 const catagore = [
   {
@@ -72,9 +73,9 @@ const tempImgData = [
 ];
 
 const Home = () => {
-  const navigation = useNavigation();
-
   const [carouselIndex, setCarouselIndex] = useState(0);
+
+  const navigation = useNavigation();
 
   return (
     <SafeAreaView style={styles.contaner}>
@@ -89,15 +90,19 @@ const Home = () => {
           />
 
           <View style={styles.headiconcont}>
-            <View style={styles.boxcont}>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('Cart');
+              }}
+              style={styles.boxcont}>
               <Image source={icon.Cart} />
-            </View>
-            <View style={styles.boxcont}>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.boxcont}>
               <Image source={icon.Notification} />
-            </View>
-            <View style={styles.boxcont}>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.boxcont}>
               <Image source={icon.Profile} />
-            </View>
+            </TouchableOpacity>
           </View>
         </View>
 

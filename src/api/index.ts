@@ -7,11 +7,11 @@ import {
 import axios from 'axios';
 
 export const API = axios.create({
-  baseURL: 'http://10.10.1.99:3000',
+  baseURL: 'http://10.10.1.40:3000',
 });
 
 const baseQueryNoAuth = fetchBaseQuery({
-  baseUrl: 'http://10.10.1.99:3000',
+  baseUrl: 'http://10.10.1.40:3000',
   prepareHeaders: async headers => {
     headers.set('Accept', 'application/json');
     return headers;

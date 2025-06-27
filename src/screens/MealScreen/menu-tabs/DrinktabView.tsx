@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 
 import {
   Text,
@@ -12,25 +12,19 @@ import {
 import {Container} from '../../../components';
 import {Colors} from '../../../colors';
 import {FlatList} from 'react-native-gesture-handler';
-import {useDispatch, useSelector} from 'react-redux';
-import {getmealdata} from '../../../redux/features/ProductSlice';
-import {useGetMealsQuery} from '../../../redux/services/mealApi';
-import {setSelectedItem} from '../../../redux/features/SelectedItemSlice';
+import {useGetDrinkQuery} from '../../../redux/services/drinkApi';
 import {useNavigation} from '@react-navigation/native';
 import IsCart from '../IsCart';
+import {useDispatch} from 'react-redux';
+import {setSelectedItem} from '../../../redux/features/SelectedItemSlice';
 
-const MealTabView = () => {
+const DrinkTabView = () => {
   const dispatch = useDispatch();
-  // const {mealData, isSuccess} = useSeledctor(state => state.meals);
-  // console.log('mealdata', mealData);
 
-  const {data, isLoading, isError} = useGetMealsQuery();
-  // if (isLoading) return <Text>Loading...</Text>;
-
-  console.log('[meals: ]', data);
-  console.log('[isLoading: ]', isLoading);
-  console.log('[isError: ]', isError);
-
+  const {data, isLoading, isError} = useGetDrinkQuery();
+  console.log('[vegan:]', data);
+  console.log('[isloading:]', isLoading);
+  console.log('[isError:]', isError);
   if (isLoading) {
     return (
       <Container style={styles.center}>
@@ -50,11 +44,7 @@ const MealTabView = () => {
     );
   }
 
-  useEffect(() => {
-    // dispatch(getmealdata());
-  }, []);
   const navigation = useNavigation();
-
   return (
     <Container style={{paddingHorizontal: 20}}>
       <Text style={{fontSize: 20}}>Sort By</Text>
@@ -75,8 +65,8 @@ const MealTabView = () => {
             <Container style={styles.productcont}>
               <Text style={styles.productName}>{item.name}</Text>
               <View style={styles.dot} />
-              <Text style={styles.ratingbox}>{item.rate}</Text>
-              <Text style={styles.rate}>$ {item.price}</Text>
+              <Text style={styles.ratebox}>{item.rate}</Text>
+              <Text style={styles.price}>$ {item.price}</Text>
             </Container>
             <Text style={styles.productdetail}>{item.description}</Text>
             <Container style={styles.line} />
@@ -87,7 +77,7 @@ const MealTabView = () => {
   );
 };
 
-export default MealTabView;
+export default DrinkTabView;
 const styles = StyleSheet.create({
   center: {
     flex: 1,
@@ -114,7 +104,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     backgroundColor: Colors.orange,
   },
-  ratingbox: {
+  ratebox: {
     backgroundColor: Colors.orange,
     paddingVertical: 3,
     width: 34,
@@ -122,7 +112,7 @@ const styles = StyleSheet.create({
     color: Colors.whitefont,
     fontSize: 12,
   },
-  rate: {
+  price: {
     fontSize: 18,
     color: Colors.orange,
   },

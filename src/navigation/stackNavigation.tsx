@@ -8,6 +8,8 @@ import Signup from '../screens/Signup';
 import TabNavigation from './tabNavigation';
 import Firstscreen from '../screens/Firstscreen';
 import {RecommendScreen} from '../screens';
+import IsCart from '../screens/MealScreen/IsCart';
+import Cart from '../screens/Carts/Cart';
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +32,8 @@ const StackNavigation = () => {
         /> */}
 
         <Stack.Screen name="Tabs" component={TabNavigation} />
+        <Stack.Screen name="IsCart" component={IsCart} />
+        <Stack.Screen name="Cart" component={Cart} />
         <Stack.Screen name="Recommend" component={RecommendScreen} />
       </Stack.Navigator>
     </NavigationContainer>

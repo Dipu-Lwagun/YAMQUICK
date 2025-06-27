@@ -1,75 +1,90 @@
 import React from 'react';
 
-import {Text, Image, StyleSheet, View} from 'react-native';
+import {
+  Text,
+  Image,
+  StyleSheet,
+  View,
+  ActivityIndicator,
+  TouchableOpacity,
+} from 'react-native';
 
 import {Container} from '../../../components';
 import {Colors} from '../../../colors';
 import {FlatList} from 'react-native-gesture-handler';
+import {useGetVeganQuery} from '../../../redux/services/veganApi';
+import {useDispatch} from 'react-redux';
+import {useNavigation} from '@react-navigation/native';
+import {setSelectedItem} from '../../../redux/features/SelectedItemSlice';
+import IsCart from '../IsCart';
 
-const snackData = [
-  {
-    id: 1,
-    image: {
-      uri: 'https://images.pexels.com/photos/32258175/pexels-photo-32258175/free-photo-of-delicious-strawberry-croissant-bakery-display.jpeg?auto=compress&cs=tinysrgb&w=600',
-    },
-    title: 'Mexican appetizer',
-    description: 'Tortilla Chips With Toppins',
-    rating: '5.0',
-    rate: '$15.00',
-  },
-  {
-    id: 2,
-    image: {
-      uri: 'https://images.pexels.com/photos/566566/pexels-photo-566566.jpeg?auto=compress&cs=tinysrgb&w=600',
-    },
-    title: 'Mexican appetizer',
-    description: 'Tortilla Chips With Toppins',
-    rating: '5.0',
-    rate: '$15.00',
-  },
-  {
-    id: 3,
-    image: {
-      uri: 'https://images.pexels.com/photos/32217805/pexels-photo-32217805/free-photo-of-close-up-of-traditional-argentine-pastries.jpeg?auto=compress&cs=tinysrgb&w=600',
-    },
-    title: 'Mexican appetizer',
-    description: 'Tortilla Chips With Toppins',
-    rating: '4.0',
-    rate: '$15.00',
-  },
-];
+const VeganTabView = () => {
+  const dispatch = useDispatch();
+  const {data, isLoading, isError} = useGetVeganQuery();
 
-const SnacksTabView = () => {
+  console.log('[vegan:]', data);
+  console.log('[isloading:]', isLoading);
+  console.log('[isError:]', isError);
+
+  if (isLoading) {
+    return (
+      <Container style={styles.center}>
+        <ActivityIndicator size="large" color={Colors.orange} />
+        <Text>Loading drinks...</Text>
+      </Container>
+    );
+  }
+
+  if (isError) {
+    return (
+      <Container style={styles.center}>
+        <Text style={{color: 'red'}}>
+          Failed to load drinks. Please try again.
+        </Text>
+      </Container>
+    );
+  }
+
+  const navigation = useNavigation();
   return (
     <Container style={{paddingHorizontal: 20}}>
       <Text style={{fontSize: 20}}>Sort By</Text>
 
       <FlatList
-        data={snackData}
+        data={data}
         keyExtractor={item => item.id.toString()}
         renderItem={({item}) => (
-          <Container>
+          <TouchableOpacity
+            onPress={() => {
+              dispatch(setSelectedItem(item));
+              navigation.navigate('IsCart');
+            }}>
             <Image
-              source={item.image}
+              source={{uri: item.image_url}}
               style={{width: 323, height: 174, borderRadius: 36}}
             />
             <Container style={styles.productcont}>
-              <Text style={styles.productName}>{item.title}</Text>
+              <Text style={styles.productName}>{item.name}</Text>
               <View style={styles.dot} />
-              <Text style={styles.ratingbox}>{item.rating}</Text>
-              <Text style={styles.rate}>{item.rate}</Text>
+              <Text style={styles.ratingbox}>{item.rate}</Text>
+              <Text style={styles.rate}>$ {item.price}</Text>
             </Container>
             <Text style={styles.productdetail}>{item.description}</Text>
             <Container style={styles.line} />
-          </Container>
+          </TouchableOpacity>
         )}
       />
     </Container>
   );
 };
 
-export default SnacksTabView;
+export default VeganTabView;
 const styles = StyleSheet.create({
+  center: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   productcont: {
     flexDirection: 'row',
     alignItems: 'center',

@@ -10,11 +10,13 @@ import ICDrincks from './logo/Drinks.png';
 import ICFavorite from './logo/heart.png';
 import ICOrderlist from './logo/order.png';
 import ICHelp from './logo/help.png';
-import ICCart from './logo/order.png';
+import ICCart from './logo/cart.png';
 import ICNotification from './logo/notification.png';
 import ICProfile from './logo/user.png';
 import IcRedhear from './logo/readheart.png';
-
+import IcLove from './logo/love.png';
+import IcOfflove from './logo/offlove.png';
+import IcStar from './logo/star.png';
 export {
   YellowLogo,
   BC1,
@@ -32,4 +34,7 @@ export {
   ICCart,
   ICNotification,
   IcRedhear,
+  IcLove,
+  IcOfflove,
+  IcStar,
 };

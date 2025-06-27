@@ -14,6 +14,9 @@ import {Colors} from '../colors';
 import {Container} from '../components';
 import SnacksTabView from './MealScreen/menu-tabs/SnacksTabView';
 import MealTabView from './MealScreen/menu-tabs/MealTabView';
+import VeganTabView from './MealScreen/menu-tabs/VeganTabView';
+import DessertTabView from './MealScreen/menu-tabs/DessertTabView';
+import DrinkTabView from './MealScreen/menu-tabs/DrinktabView';
 
 // const MealTabView = () => {
 //   return (
@@ -22,27 +25,27 @@ import MealTabView from './MealScreen/menu-tabs/MealTabView';
 //     </Container>
 //   );
 // };
-const VeganTabView = () => {
-  return (
-    <Container>
-      <Text style={{fontSize: 50}}>Vegan Tab VIEW</Text>
-    </Container>
-  );
-};
-const DessertTabView = () => {
-  return (
-    <Container>
-      <Text style={{fontSize: 50}}>Dessert Tab VIEW</Text>
-    </Container>
-  );
-};
-const DrinksTabView = () => {
-  return (
-    <Container>
-      <Text style={{fontSize: 50}}>Drink Tab VIEW</Text>
-    </Container>
-  );
-};
+// const VeganTabView = () => {
+//   return (
+//     <Container>
+//       <Text style={{fontSize: 50}}>Vegan Tab VIEW</Text>
+//     </Container>
+//   );
+// };
+// const DessertTabView = () => {
+//   return (
+//     <Container>
+//       <Text style={{fontSize: 50}}>Dessert Tab VIEW</Text>
+//     </Container>
+//   );
+// };
+// const DrinksTabView = () => {
+//   return (
+//     <Container>
+//       <Text style={{fontSize: 50}}>Drink Tab VIEW</Text>
+//     </Container>
+//   );
+// };
 
 const tabData = [
   {
@@ -77,7 +80,7 @@ const tabData = [
     title: 'Drinks',
     icon: icon.Drinks,
 
-    tab: <DrinksTabView />,
+    tab: <DrinkTabView />,
   },
 ];
 
