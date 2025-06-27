@@ -16,9 +16,12 @@ import {
 
 import {icon} from '../icon';
 import {Colors} from '../colors';
-import {BC1} from '../assets/image';
+import {BC1, IcLove, IcOfflove, IcStar} from '../assets/image';
 import {useNavigation} from '@react-navigation/native';
 import Cart from './Carts/Cart';
+import {Container} from '../components';
+import {useDispatch} from 'react-redux';
+import {useGetDrinkQuery} from '../redux/services/drinkApi';
 
 const catagore = [
   {
@@ -43,7 +46,7 @@ const catagore = [
   },
 ];
 
-const data = [
+const datas = [
   {
     id: 1,
     cover: BC1,
@@ -74,6 +77,21 @@ const tempImgData = [
 
 const Home = () => {
   const [carouselIndex, setCarouselIndex] = useState(0);
+  const dispatch = useDispatch();
+  const {data, isLoading, isError} = useGetDrinkQuery();
+
+  const [liked, setLiked] = useState(false);
+  const [disliked, setDisliked] = useState(false);
+
+  const handleLike = () => {
+    setLiked(!liked);
+    if (!liked) setDisliked(false);
+  };
+
+  const handleDislike = () => {
+    setDisliked(!disliked);
+    if (!disliked) setLiked(false);
+  };
 
   const navigation = useNavigation();
 
@@ -129,7 +147,7 @@ const Home = () => {
             <Text style={styles.itemhead}>Best Seller </Text>
 
             <View style={styles.bestitem}>
-              {data.map(item => {
+              {datas.map(item => {
                 return (
                   <View key={item.id}>
                     <Image source={item.cover} />
@@ -140,7 +158,10 @@ const Home = () => {
             </View>
           </View>
 
-          <View>
+          <Container
+            marginTop={20}
+            position="relative"
+            style={{alignItems: 'center'}}>
             <Image
               source={{
                 uri: tempImgData[carouselIndex],
@@ -148,9 +169,50 @@ const Home = () => {
               style={{
                 width: 323,
                 height: 128,
-                backgroundColor: 'red',
+                borderRadius: 20,
               }}
             />
+            <Pressable
+              style={styles.bannerprev}
+              onPress={() =>
+                setCarouselIndex(prev => {
+                  if (prev === 0) {
+                    return 0;
+                  }
+                  return prev - 1;
+                })
+              }>
+              <Text
+                style={{
+                  textAlign: 'center',
+                  fontSize: 30,
+                  color: Colors.orange,
+                  opacity: 0.5,
+                }}>
+                {'<'}
+              </Text>
+            </Pressable>
+            <Pressable
+              style={styles.bannernext}
+              onPress={() =>
+                setCarouselIndex(prev => {
+                  if (prev === 4) {
+                    return 4;
+                  }
+
+                  return prev + 1;
+                })
+              }>
+              <Text
+                style={{
+                  textAlign: 'center',
+                  fontSize: 30,
+                  color: Colors.orange,
+                  opacity: 0.5,
+                }}>
+                {'>'}
+              </Text>
+            </Pressable>
             <View style={{flexDirection: 'row', gap: 4, marginTop: 5}}>
               {[1, 2, 3, 4, 5].map((i, index) => {
                 return (
@@ -175,35 +237,14 @@ const Home = () => {
                   </View>
                 );
               })}
-
-              <Pressable
-                onPress={() =>
-                  setCarouselIndex(prev => {
-                    if (prev === 0) {
-                      return 0;
-                    }
-                    return prev - 1;
-                  })
-                }>
-                <Text>Previous</Text>
-              </Pressable>
-              <Pressable
-                onPress={() =>
-                  setCarouselIndex(prev => {
-                    if (prev === 4) {
-                      return 4;
-                    }
-
-                    return prev + 1;
-                  })
-                }>
-                <Text>Next</Text>
-              </Pressable>
             </View>
-          </View>
+          </Container>
 
           <View style={{paddingHorizontal: 34}}>
-            <Text style={{fontSize: 20}}>Recommend</Text>
+            <Text
+              style={{fontSize: 20, fontWeight: '500', color: Colors.fonts}}>
+              Recommend
+            </Text>
 
             <View
               style={{
@@ -212,20 +253,62 @@ const Home = () => {
                 flexDirection: 'row',
                 flexWrap: 'wrap',
               }}>
-              {tempImgData.map((item, index) => {
-                return (
-                  <Pressable
-                    key={index}
-                    onPress={() => navigation.navigate('Recommend')}>
-                    <View>
-                      <Image
-                        source={{uri: item}}
-                        style={{width: 159, height: 140, borderRadius: 20}}
-                      />
-                    </View>
-                  </Pressable>
-                );
-              })}
+              <FlatList
+                data={data}
+                numColumns={2}
+                keyExtractor={item => item.id.toString()}
+                renderItem={({item}) => (
+                  <TouchableOpacity style={{margin: 5}}>
+                    <Image
+                      source={{uri: item.image_url}}
+                      style={{
+                        height: 120,
+                        width: 140,
+                        borderRadius: 20,
+                        position: 'relative',
+                      }}
+                    />
+                    <Container
+                      position="absolute"
+                      top={0}
+                      left={15}
+                      gap={5}
+                      style={{flexDirection: 'row', alignItems: 'center'}}>
+                      <Container style={styles.rate}>
+                        <Text style={{fontSize: 12, color: Colors.fonts}}>
+                          {item.rate}
+                        </Text>
+                        <Image source={IcStar} style={styles.ratetext} />
+                      </Container>
+                      <TouchableOpacity onPress={handleLike}>
+                        <Image
+                          source={liked ? IcLove : IcOfflove}
+                          style={{height: 14, width: 14}}
+                        />
+                      </TouchableOpacity>
+                    </Container>
+                    <Container
+                      bottom={10}
+                      right={0}
+                      position="absolute"
+                      width={45}
+                      style={{
+                        backgroundColor: Colors.orange,
+                        borderTopLeftRadius: 10,
+                        borderBottomLeftRadius: 10,
+                      }}>
+                      <Text
+                        style={{
+                          color: Colors.whitefont,
+                          fontSize: 12,
+                          paddingHorizontal: 5,
+                        }}>
+                        {`$ ${item.price}`}{' '}
+                      </Text>
+                    </Container>
+                  </TouchableOpacity>
+                )}
+              />
             </View>
           </View>
         </View>
@@ -327,5 +410,45 @@ const styles = StyleSheet.create({
   bestitem: {
     flexDirection: 'row',
     gap: 10,
+  },
+
+  rate: {
+    marginTop: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: Colors.orange2,
+    width: 34,
+    gap: 4,
+    borderRadius: 10,
+    paddingHorizontal: 5,
+  },
+  ratetext: {
+    height: 8,
+    width: 8,
+    backgroundColor: Colors.yellow2,
+  },
+  bannernext: {
+    position: 'absolute',
+    backgroundColor: Colors.whitebg,
+    opacity: 0.6,
+    right: 20,
+    top: 40,
+    height: 50,
+    width: 50,
+    borderRadius: 30,
+    borderColor: Colors.yellow,
+    borderWidth: 1,
+  },
+  bannerprev: {
+    position: 'absolute',
+    backgroundColor: Colors.whitebg,
+    opacity: 0.6,
+    left: 20,
+    top: 40,
+    height: 50,
+    width: 50,
+    borderRadius: 30,
+    borderColor: Colors.yellow,
+    borderWidth: 1,
   },
 });

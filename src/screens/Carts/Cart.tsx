@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import {Container} from '../../components';
-import {ICCart} from '../../assets/image';
+import {IcAddToCart, ICCart} from '../../assets/image';
 import {Colors} from '../../colors';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../redux/Store';
@@ -31,57 +31,96 @@ const Cart = () => {
       </Container>
       <Container style={styles.line} />
       <ScrollView>
-        <Text style={styles.title}>
-          You have{cartItem.length} items in the cart
-        </Text>
-        <FlatList
-          data={cartItem}
-          keyExtractor={item => item.id.toString}
-          renderItem={({item}) => (
-            <Container marginTop={26}>
-              <Container style={{flexDirection: 'row', alignItems: 'center'}}>
-                <Image
-                  source={{
-                    uri: item.image_url,
-                  }}
-                  style={styles.image}
-                />
-                <Container
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    width: '70%',
-                    paddingLeft: 10,
-                  }}>
-                  <Container>
-                    <Text style={styles.name}>{item.name}</Text>
-                    <Text style={styles.price}>{`$ ${item.price}`}</Text>
-                  </Container>
-                  <Container style={{}}>
-                    <Text style={styles.time}>29/11/24</Text>
-                    <Text style={styles.time}>15:00</Text>
+        {cartItem.length > 0 ? (
+          <Container>
+            <Text style={styles.title}>
+              You have{cartItem.length} items in the cart
+            </Text>
+            <FlatList
+              data={cartItem}
+              keyExtractor={item => item.id.toString}
+              renderItem={({item}) => (
+                <Container marginTop={26}>
+                  <Container
+                    style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <Image
+                      source={{
+                        uri: item.image_url,
+                      }}
+                      style={styles.image}
+                    />
                     <Container
                       style={{
                         flexDirection: 'row',
-                        gap: 10,
-                        alignItems: 'center',
-                        justifyContent: 'flex-end',
+                        justifyContent: 'space-between',
+                        width: '70%',
+                        paddingLeft: 10,
                       }}>
-                      <TouchableOpacity onPress={() => dispatch(decrement())}>
-                        <Text style={styles.dec}>-</Text>
-                      </TouchableOpacity>
-                      <Text style={styles.count}>{item.quantity}</Text>
-                      <TouchableOpacity onPress={() => dispatch(increment())}>
-                        <Text style={styles.inc}>+</Text>
-                      </TouchableOpacity>
+                      <Container>
+                        <Text style={styles.name}>{item.name}</Text>
+                        <Text style={styles.price}>{`$ ${item.price}`}</Text>
+                      </Container>
+                      <Container style={{}}>
+                        <Text style={styles.time}>29/11/24</Text>
+                        <Text style={styles.time}>15:00</Text>
+                        <Container
+                          style={{
+                            flexDirection: 'row',
+                            gap: 10,
+                            alignItems: 'center',
+                            justifyContent: 'flex-end',
+                          }}>
+                          <TouchableOpacity
+                            onPress={() => dispatch(decrement())}>
+                            <Text style={styles.dec}>-</Text>
+                          </TouchableOpacity>
+                          <Text style={styles.count}>{item.quantity}</Text>
+                          <TouchableOpacity
+                            onPress={() => dispatch(increment())}>
+                            <Text style={styles.inc}>+</Text>
+                          </TouchableOpacity>
+                        </Container>
+                      </Container>
                     </Container>
                   </Container>
+                  <Container style={styles.line2} />
                 </Container>
+              )}
+            />
+            <Container style={{gap: 26}}>
+              <Container
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  marginTop: 58,
+                }}>
+                <Text style={styles.subtotal}>Subtotal</Text>
+                <Text style={styles.subtotalAmt}>$ 32.00</Text>
               </Container>
-              <Container style={styles.line2} />
+              <Container
+                style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                <Text style={styles.subtotal}>Subtotal</Text>
+                <Text style={styles.subtotalAmt}>$ 32.00</Text>
+              </Container>
+              <Container
+                style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                <Text style={styles.subtotal}>Subtotal</Text>
+                <Text style={styles.subtotalAmt}>$ 32.00</Text>
+              </Container>
+              <Container style={styles.dashline} />
+              <Container
+                style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                <Text style={styles.subtotal}>Subtotal</Text>
+                <Text style={styles.subtotalAmt}>$ 32.00</Text>
+              </Container>
             </Container>
-          )}
-        />
+          </Container>
+        ) : (
+          <Container flex={1}>
+            <Text style={styles.title}>Your cart is empty</Text>
+            <Image source={IcAddToCart} style={styles.addtocarticon} />
+          </Container>
+        )}
       </ScrollView>
     </Container>
   );
@@ -185,5 +224,28 @@ const styles = StyleSheet.create({
     color: Colors.orange,
     fontSize: 10,
     borderRadius: 13,
+  },
+  dashline: {
+    borderWidth: 1,
+    borderColor: Colors.yellow2,
+    borderStyle: 'dashed',
+  },
+  subtotal: {
+    fontSize: 20,
+    fontWeight: '500',
+    color: Colors.whitefont,
+  },
+  subtotalAmt: {
+    fontSize: 20,
+    fontWeight: '500',
+    color: Colors.whitefont,
+    textAlign: 'right',
+  },
+  addtocarticon: {
+    backgroundColor: 'blue',
+    height: 184,
+    width: 184,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

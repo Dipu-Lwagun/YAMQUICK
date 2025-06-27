@@ -17,6 +17,7 @@ import IcRedhear from './logo/readheart.png';
 import IcLove from './logo/love.png';
 import IcOfflove from './logo/offlove.png';
 import IcStar from './logo/star.png';
+import IcAddToCart from './logo/addToCart.png';
 export {
   YellowLogo,
   BC1,
@@ -37,4 +38,5 @@ export {
   IcLove,
   IcOfflove,
   IcStar,
+  IcAddToCart,
 };

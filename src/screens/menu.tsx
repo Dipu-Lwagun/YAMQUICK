@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  TouchableOpacity,
   View,
 } from 'react-native';
 
@@ -17,6 +18,8 @@ import MealTabView from './MealScreen/menu-tabs/MealTabView';
 import VeganTabView from './MealScreen/menu-tabs/VeganTabView';
 import DessertTabView from './MealScreen/menu-tabs/DessertTabView';
 import DrinkTabView from './MealScreen/menu-tabs/DrinktabView';
+import {useNavigation} from '@react-navigation/native';
+import Cart from './Carts/Cart';
 
 // const MealTabView = () => {
 //   return (
@@ -86,6 +89,7 @@ const tabData = [
 
 const Menu = () => {
   const [selectedTab, setSelectedTab] = useState(0);
+  const naivgation = useNavigation();
 
   return (
     <Container flex={1} color={Colors.yellow}>
@@ -98,9 +102,13 @@ const Menu = () => {
           />
 
           <View style={styles.headiconcont}>
-            <View style={styles.boxcont}>
+            <TouchableOpacity
+              onPress={() => {
+                naivgation.navigate('Cart');
+              }}
+              style={styles.boxcont}>
               <Image source={icon.Cart} />
-            </View>
+            </TouchableOpacity>
             <View style={styles.boxcont}>
               <Image source={icon.Notification} />
             </View>
