@@ -25,7 +25,6 @@ const MealTabView = () => {
   // console.log('mealdata', mealData);
 
   const {data, isLoading, isError} = useGetMealsQuery();
-  // if (isLoading) return <Text>Loading...</Text>;
 
   console.log('[meals: ]', data);
   console.log('[isLoading: ]', isLoading);
@@ -50,9 +49,9 @@ const MealTabView = () => {
     );
   }
 
-  useEffect(() => {
-    // dispatch(getmealdata());
-  }, []);
+  // useEffect(() => {
+  //   // dispatch(getmealdata());
+  // }, []);
   const navigation = useNavigation();
 
   return (

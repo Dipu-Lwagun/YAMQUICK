@@ -15,6 +15,7 @@ type Props = {
   bottom?: Number;
   right?: Number;
   width?: number;
+  height?: number;
 };
 
 const Container: FC<Props> = ({
@@ -31,6 +32,7 @@ const Container: FC<Props> = ({
   bottom,
   right,
   width,
+  height,
 }) => {
   return (
     <View
@@ -45,6 +47,7 @@ const Container: FC<Props> = ({
         paddingHorizontal: hPadding,
         gap: gap,
         width: width,
+        height: height,
         marginTop: marginTop,
         ...style,
       }}>

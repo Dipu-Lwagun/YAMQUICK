@@ -4,6 +4,7 @@ import AuthSlice from './features/AuthSlice';
 import ProductSlice from './features/ProductSlice';
 import SelectedItemReducer from './features/SelectedItemSlice';
 import CartSlice from './features/CartSlice';
+import OrderSlice from './features/orderSlice';
 
 import {mealApi} from './services/mealApi';
 import {veganApi} from './services/veganApi';
@@ -23,12 +24,13 @@ const reducers = combineReducers({
   products: ProductSlice,
   selectitem: SelectedItemReducer,
   cart: CartSlice,
+  order: OrderSlice,
 
   [mealApi.reducerPath]: mealApi.reducer,
   [veganApi.reducerPath]: veganApi.reducer,
   [dessertApi.reducerPath]: dessertApi.reducer,
   [drinkApi.reducerPath]: drinkApi.reducer,
-  selectedItem: SelectedItemReducer, // seletcitem
+  selectedItem: SelectedItemReducer,
 });
 
 export const store = configureStore({

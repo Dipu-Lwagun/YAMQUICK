@@ -1,6 +1,6 @@
 import {createApi} from '@reduxjs/toolkit/query/react';
 
-import {API, baseQuery} from '../../api';
+import {baseQuery} from '../../api';
 
 export const mealApi = createApi({
   reducerPath: 'mealApi',

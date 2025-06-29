@@ -80,18 +80,20 @@ const Home = () => {
   const dispatch = useDispatch();
   const {data, isLoading, isError} = useGetDrinkQuery();
 
-  const [liked, setLiked] = useState(false);
-  const [disliked, setDisliked] = useState(false);
+  const [liked, setLiked] = useState<{[key: string]: boolean}>({});
+  // const [disliked, setDisliked] = useState(false);
 
-  const handleLike = () => {
-    setLiked(!liked);
-    if (!liked) setDisliked(false);
+  const handleLike = (id: string | number) => {
+    setLiked(prev => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
   };
 
-  const handleDislike = () => {
-    setDisliked(!disliked);
-    if (!disliked) setLiked(false);
-  };
+  // const handleDislike = () => {
+  //   setDisliked(!disliked);
+  //   if (!disliked) setLiked(false);
+  // };
 
   const navigation = useNavigation();
 
@@ -157,7 +159,7 @@ const Home = () => {
               })}
             </View>
           </View>
-
+          {/* banner */}
           <Container
             marginTop={20}
             position="relative"
@@ -240,6 +242,8 @@ const Home = () => {
             </View>
           </Container>
 
+          {/* recommanded */}
+
           <View style={{paddingHorizontal: 34}}>
             <Text
               style={{fontSize: 20, fontWeight: '500', color: Colors.fonts}}>
@@ -280,9 +284,9 @@ const Home = () => {
                         </Text>
                         <Image source={IcStar} style={styles.ratetext} />
                       </Container>
-                      <TouchableOpacity onPress={handleLike}>
+                      <TouchableOpacity onPress={() => handleLike(item.id)}>
                         <Image
-                          source={liked ? IcLove : IcOfflove}
+                          source={liked[item.id] ? IcLove : IcOfflove}
                           style={{height: 14, width: 14}}
                         />
                       </TouchableOpacity>

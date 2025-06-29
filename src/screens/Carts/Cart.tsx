@@ -14,12 +14,30 @@ import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../redux/Store';
 import {decrement, increment} from '../../redux/features/CounterSlice';
 import {FlatList} from 'react-native-gesture-handler';
+import {useNavigation} from '@react-navigation/native';
+import Menu from '../menu';
+import ConfirmOrder from './ConfirmOrder';
+import {setOrderItems} from '../../redux/features/orderSlice';
 
 const Cart = () => {
   const dispatch = useDispatch();
   const value = useSelector((state: RootState) => state.counter.Value);
 
   const cartItem = useSelector((state: RootState) => state.cart.cartItems);
+  const navigation = useNavigation();
+
+  const subtotal = cartItem.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0,
+  );
+  const tax = subtotal * 0.1;
+  const delivery = 3;
+  const total = subtotal + tax + delivery;
+
+  const handleCheckout = () => {
+    dispatch(setOrderItems(cartItem));
+    navigation.navigate('ConfirmOrder');
+  };
 
   return (
     <Container style={styles.mainscreen}>
@@ -63,23 +81,6 @@ const Cart = () => {
                       <Container style={{}}>
                         <Text style={styles.time}>29/11/24</Text>
                         <Text style={styles.time}>15:00</Text>
-                        <Container
-                          style={{
-                            flexDirection: 'row',
-                            gap: 10,
-                            alignItems: 'center',
-                            justifyContent: 'flex-end',
-                          }}>
-                          <TouchableOpacity
-                            onPress={() => dispatch(decrement())}>
-                            <Text style={styles.dec}>-</Text>
-                          </TouchableOpacity>
-                          <Text style={styles.count}>{item.quantity}</Text>
-                          <TouchableOpacity
-                            onPress={() => dispatch(increment())}>
-                            <Text style={styles.inc}>+</Text>
-                          </TouchableOpacity>
-                        </Container>
                       </Container>
                     </Container>
                   </Container>
@@ -95,30 +96,66 @@ const Cart = () => {
                   marginTop: 58,
                 }}>
                 <Text style={styles.subtotal}>Subtotal</Text>
-                <Text style={styles.subtotalAmt}>$ 32.00</Text>
+                <Text style={styles.subtotalAmt}>$ {subtotal.toFixed(2)}</Text>
               </Container>
               <Container
                 style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                <Text style={styles.subtotal}>Subtotal</Text>
-                <Text style={styles.subtotalAmt}>$ 32.00</Text>
+                <Text style={styles.subtotal}>Tax and Fees</Text>
+                <Text style={styles.subtotalAmt}>$ {tax.toFixed(2)}</Text>
               </Container>
               <Container
                 style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                <Text style={styles.subtotal}>Subtotal</Text>
-                <Text style={styles.subtotalAmt}>$ 32.00</Text>
+                <Text style={styles.subtotal}>Delivery</Text>
+                <Text style={styles.subtotalAmt}>$ {delivery.toFixed(2)}</Text>
               </Container>
               <Container style={styles.dashline} />
               <Container
                 style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                <Text style={styles.subtotal}>Subtotal</Text>
-                <Text style={styles.subtotalAmt}>$ 32.00</Text>
+                <Text style={styles.subtotal}>Total</Text>
+                <Text style={styles.subtotalAmt}>$ {total.toFixed(2)}</Text>
               </Container>
             </Container>
+            <TouchableOpacity onPress={handleCheckout} style={styles.checkout}>
+              <Text
+                style={{
+                  fontSize: 24,
+                  fontWeight: '500',
+                  color: Colors.orange,
+                }}>
+                Checkout
+              </Text>
+            </TouchableOpacity>
           </Container>
         ) : (
-          <Container flex={1}>
+          // Empty card
+
+          <Container>
             <Text style={styles.title}>Your cart is empty</Text>
-            <Image source={IcAddToCart} style={styles.addtocarticon} />
+            <Container
+              style={{
+                flex: 1,
+                height: 500,
+                // backgroundColor: 'blue',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('Menu');
+                }}>
+                <Image source={IcAddToCart} style={styles.addtocarticon} />
+              </TouchableOpacity>
+              <Text
+                style={{
+                  fontSize: 24,
+                  fontWeight: 800,
+                  color: Colors.whitefont,
+                  width: 158,
+                  textAlign: 'center',
+                }}>
+                Want to add something?
+              </Text>
+            </Container>
           </Container>
         )}
       </ScrollView>
@@ -242,10 +279,19 @@ const styles = StyleSheet.create({
     textAlign: 'right',
   },
   addtocarticon: {
-    backgroundColor: 'blue',
     height: 184,
     width: 184,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  checkout: {
+    backgroundColor: Colors.yellow,
+    width: 131,
+    height: 36,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginHorizontal: 100,
+    marginTop: 82,
+    borderRadius: 20,
   },
 });
