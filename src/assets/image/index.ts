@@ -18,6 +18,15 @@ import IcLove from './logo/love.png';
 import IcOfflove from './logo/offlove.png';
 import IcStar from './logo/star.png';
 import IcAddToCart from './logo/addToCart.png';
+import IcMyorder from './logo/myorder.png';
+import IcProfile from './logo/profile.png';
+import IcCall from './logo/call.png';
+import IcMassage from './logo/massage.png';
+import IcSetting from './logo/setting.png';
+import IcLocation from './logo/location.png';
+import IcPayment from './logo/payment.png';
+import IcLogout from './logo/logout.png';
+
 export {
   YellowLogo,
   BC1,
@@ -39,4 +48,12 @@ export {
   IcOfflove,
   IcStar,
   IcAddToCart,
+  IcMyorder,
+  IcProfile,
+  IcCall,
+  IcMassage,
+  IcSetting,
+  IcLocation,
+  IcPayment,
+  IcLogout,
 };

@@ -1,96 +1,101 @@
-import {StyleSheet, Text, Image, FlatList} from 'react-native';
-import React from 'react';
+import {StyleSheet, Text, Image, FlatList, Pressable} from 'react-native';
+import React, {useState} from 'react';
 import {Container} from '../components';
 import {Colors} from '../colors';
 import {icon} from '../icon';
 
-const favData = [
+const ActiveTab = () => {
+  return (
+    <Container>
+      <Text>Active tab </Text>
+    </Container>
+  );
+};
+const CompletedTab = () => {
+  return (
+    <Container>
+      <Text>Completed tab </Text>
+    </Container>
+  );
+};
+const CancelledTab = () => {
+  return (
+    <Container>
+      <Text>Cancelled tab </Text>
+    </Container>
+  );
+};
+const orderStatus = [
   {
     id: 1,
-    image: {
-      uri: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGZvb2R8ZW58MHwwfDB8fHww',
-    },
-    title: 'chicken curry',
-    description: 'Lorem ipsum dolor sit amet, consectetur.',
+    title: 'Active',
+    tab: <ActiveTab />,
   },
   {
     id: 2,
-    image: {
-      uri: 'https://media.istockphoto.com/id/617781022/photo/baskets-of-onion-rings-curly-fries-and-cheese-sticks.webp?a=1&b=1&s=612x612&w=0&k=20&c=k_eTPGLThcifq-ltM0T-Nv-BkaniaA_9ZE4ONqZauqA=',
-    },
-    title: 'Rotee',
-    description: 'Lorem ipsum dolor sit amet, consectetur.',
+    title: 'Completed',
+    tab: <CompletedTab />,
   },
   {
     id: 3,
-    image: {
-      uri: 'https://media.istockphoto.com/id/617781022/photo/baskets-of-onion-rings-curly-fries-and-cheese-sticks.webp?a=1&b=1&s=612x612&w=0&k=20&c=k_eTPGLThcifq-ltM0T-Nv-BkaniaA_9ZE4ONqZauqA=',
-    },
-    title: 'Rotee',
-    description: 'Lorem ipsum dolor sit amet, consectetur.',
-  },
-  {
-    id: 4,
-    image: {
-      uri: 'https://media.istockphoto.com/id/617781022/photo/baskets-of-onion-rings-curly-fries-and-cheese-sticks.webp?a=1&b=1&s=612x612&w=0&k=20&c=k_eTPGLThcifq-ltM0T-Nv-BkaniaA_9ZE4ONqZauqA=',
-    },
-    title: 'Rotee',
-    description: 'Lorem ipsum dolor sit amet, consectetur.',
-  },
-  {
-    id: 5,
-    image: {
-      uri: 'https://media.istockphoto.com/id/617781022/photo/baskets-of-onion-rings-curly-fries-and-cheese-sticks.webp?a=1&b=1&s=612x612&w=0&k=20&c=k_eTPGLThcifq-ltM0T-Nv-BkaniaA_9ZE4ONqZauqA=',
-    },
-    title: 'Rotee',
-    description: 'Lorem ipsum dolor sit amet, consectetur.',
-  },
-  {
-    id: 6,
-    image: {
-      uri: 'https://media.istockphoto.com/id/617781022/photo/baskets-of-onion-rings-curly-fries-and-cheese-sticks.webp?a=1&b=1&s=612x612&w=0&k=20&c=k_eTPGLThcifq-ltM0T-Nv-BkaniaA_9ZE4ONqZauqA=',
-    },
-    title: 'Rotee',
-    description: 'Lorem ipsum dolor sit amet, consectetur.',
-  },
-  {
-    id: 7,
-    image: {
-      uri: 'https://media.istockphoto.com/id/617781022/photo/baskets-of-onion-rings-curly-fries-and-cheese-sticks.webp?a=1&b=1&s=612x612&w=0&k=20&c=k_eTPGLThcifq-ltM0T-Nv-BkaniaA_9ZE4ONqZauqA=',
-    },
-    title: 'Rotee',
-    description: 'Lorem ipsum dolor sit amet, consectetur.',
-  },
-  {
-    id: 8,
-    image: {
-      uri: 'https://media.istockphoto.com/id/617781022/photo/baskets-of-onion-rings-curly-fries-and-cheese-sticks.webp?a=1&b=1&s=612x612&w=0&k=20&c=k_eTPGLThcifq-ltM0T-Nv-BkaniaA_9ZE4ONqZauqA=',
-    },
-    title: 'Rotee',
-    description: 'Lorem ipsum dolor sit amet, consectetur.',
-  },
-  {
-    id: 9,
-    image: {
-      uri: 'https://media.istockphoto.com/id/617781022/photo/baskets-of-onion-rings-curly-fries-and-cheese-sticks.webp?a=1&b=1&s=612x612&w=0&k=20&c=k_eTPGLThcifq-ltM0T-Nv-BkaniaA_9ZE4ONqZauqA=',
-    },
-    title: 'Rotee',
-    description: 'Lorem ipsum dolor sit amet, consectetur.',
+    title: 'Cancelled',
+
+    tab: <CancelledTab />,
   },
 ];
-const favorites = () => {
+const Order = () => {
+  const [selectstatus, setSelectStatu] = useState(0);
+
   return (
     <Container flex={1} color={Colors.yellow}>
       <Text style={styles.headertext}>My Orders</Text>
-      <Container
-        color={Colors.whitebg}
-        flex={1}
-        style={styles.whitebox}></Container>
+      <Container color={Colors.whitebg} flex={1} style={styles.whitebox}>
+        <Container
+          style={{
+            flexDirection: 'row',
+            alignContent: 'center',
+            justifyContent: 'space-around',
+          }}>
+          {orderStatus.map((item, index) => {
+            return (
+              <Pressable
+                key={index}
+                onPress={() => setSelectStatu(index)}
+                style={{
+                  marginTop: 35,
+                  width: 104,
+                  height: 28,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: 20,
+                  backgroundColor:
+                    selectstatus === index ? Colors.orange : Colors.orange2,
+                }}>
+                <Container>
+                  <Text
+                    style={{
+                      color:
+                        selectstatus === index
+                          ? Colors.whitefont
+                          : Colors.orange,
+                    }}>
+                    {item.title}
+                  </Text>
+                </Container>
+              </Pressable>
+            );
+          })}
+        </Container>
+
+        <Container hPadding={25} marginTop={30}>
+          {orderStatus[selectstatus].tab}
+        </Container>
+      </Container>
     </Container>
   );
 };
 
-export default favorites;
+export default Order;
 
 const styles = StyleSheet.create({
   headertext: {

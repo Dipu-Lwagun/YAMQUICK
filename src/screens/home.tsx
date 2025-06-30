@@ -17,7 +17,7 @@ import {
 import {icon} from '../icon';
 import {Colors} from '../colors';
 import {BC1, IcLove, IcOfflove, IcStar} from '../assets/image';
-import {useNavigation} from '@react-navigation/native';
+import {DrawerActions, useNavigation} from '@react-navigation/native';
 import Cart from './Carts/Cart';
 import {Container} from '../components';
 import {useDispatch} from 'react-redux';
@@ -120,7 +120,9 @@ const Home = () => {
             <TouchableOpacity style={styles.boxcont}>
               <Image source={icon.Notification} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.boxcont}>
+            <TouchableOpacity
+              onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
+              style={styles.boxcont}>
               <Image source={icon.Profile} />
             </TouchableOpacity>
           </View>
