@@ -14,6 +14,7 @@ import Menu from '../screens/menu';
 import ConfirmOrder from '../screens/Carts/ConfirmOrder';
 import drawerNavigation from './Drawer/drawerNavigation';
 import Onboarding from '../screens/Onboarding';
+import Forgetpassword from '../screens/Forgetpassword';
 
 const Stack = createNativeStackNavigator();
 
@@ -37,6 +38,8 @@ const StackNavigation = () => {
 
         <Stack.Screen name="Onborad" component={Onboarding} />
         <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Signup" component={Signup} />
+        <Stack.Screen name="Forgetpassword" component={Forgetpassword} />
         <Stack.Screen name="Maindower" component={drawerNavigation} />
         <Stack.Screen name="IsCart" component={IsCart} />
         <Stack.Screen name="Cart" component={Cart} />

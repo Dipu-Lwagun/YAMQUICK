@@ -1,4 +1,5 @@
 import {
+  Image,
   KeyboardAvoidingView,
   Pressable,
   ScrollView,
@@ -14,6 +15,10 @@ import {Colors} from '../colors';
 import {Container} from '../components';
 import {useDispatch} from 'react-redux';
 import {login} from '../redux/features/AuthSlice';
+import {IcFacebook, IcFingerprint, IcGoogle} from '../assets/image';
+import {useNavigation} from '@react-navigation/native';
+import Signup from './Signup';
+import Forgetpassword from './Forgetpassword';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -30,7 +35,14 @@ const Login = () => {
     console.warn('params:', params);
     dispatch(login(params));
   };
+  const navigation = useNavigation();
 
+  const signup = () => {
+    navigation.navigate('Signup');
+  };
+  const forgetpassword = () => {
+    navigation.navigate('Forgetpassword');
+  };
   return (
     <ScrollView style={styles.contaner}>
       <Text style={styles.headtext}>Log in</Text>
@@ -62,7 +74,9 @@ const Login = () => {
             secureTextEntry
           />
         </View>
-        <Text style={styles.forgetpsw}>forget Password</Text>
+        <TouchableOpacity onPress={forgetpassword}>
+          <Text style={styles.forgetpsw}>forget Password</Text>
+        </TouchableOpacity>
         <Container marginTop={50}>
           <TouchableOpacity onPress={handlingLogin} style={styles.loginbtm}>
             <Text
@@ -79,6 +93,41 @@ const Login = () => {
         <Text style={{textAlign: 'center', marginTop: 29}}>
           or sign up with
         </Text>
+        <Container
+          style={{
+            flexDirection: 'row',
+            gap: 8,
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginTop: 7,
+          }}>
+          <TouchableOpacity>
+            <Image source={IcGoogle} style={{height: 34, width: 34}} />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Image source={IcFacebook} style={{height: 34, width: 34}} />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Image source={IcFingerprint} style={{height: 34, width: 34}} />
+          </TouchableOpacity>
+        </Container>
+        <Container
+          style={{
+            marginTop: 30,
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+          <Text style={{fontSize: 14, color: Colors.fonts, fontWeight: 400}}>
+            Don’t have an account?
+          </Text>
+          <TouchableOpacity onPress={signup}>
+            <Text style={{fontSize: 14, color: Colors.orange, fontWeight: 400}}>
+              {' '}
+              Sign Up
+            </Text>
+          </TouchableOpacity>
+        </Container>
       </View>
     </ScrollView>
   );

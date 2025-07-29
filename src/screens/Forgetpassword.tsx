@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {Container} from '../components';
 import {Colors} from '../colors';
 import {IcFacebook, IcFingerprint, IcGoogle} from '../assets/image';
@@ -16,24 +16,21 @@ import {Formik} from 'formik';
 import * as Yup from 'yup';
 
 const signupscheme = Yup.object().shape({
-  fullname: Yup.string().required('full name is required'),
   password: Yup.string()
     .min(5, 'minimum5 characters')
     .required('password is required'),
-  email: Yup.string().email('invalidemail').required('Emailis required'),
-  phone: Yup.number()
-    .min(10, 'minimum number 10')
-    .required('phone is required'),
+  confirmPasswor: Yup.string()
+    .oneOf([Yup.ref('password'), null], 'Password much match')
+    .required('confirm Password is required'),
 });
-const Signup = () => {
+const Forgetpassword = () => {
+  const [showPasswor, setShowPassword] = useState(false);
+  const [confirmpassword, setConfirmpassword] = useState(false);
   return (
     <Formik
       initialValues={{
-        fullname: '',
         password: '',
-        email: '',
-        phone: '',
-        dob: '',
+        confromPassword: '',
       }}
       validationSchema={signupscheme}
       onSubmit={values => {
@@ -69,34 +66,6 @@ const Signup = () => {
                       fontWeight: '500',
                       color: Colors.fonts,
                     }}>
-                    Full Name
-                  </Text>
-                  <TextInput
-                    style={{
-                      backgroundColor: Colors.yellow2,
-                      paddingHorizontal: 15,
-                      borderRadius: 13,
-                      color: Colors.fonts,
-                    }}
-                    placeholder="Chabilal Lwagun"
-                    placeholderTextColor={Colors.fonts}
-                    onChangeText={handleChange('fullname')}
-                    onBlur={handleBlur('fullname')}
-                    value={values.fullname}
-                  />
-                  {touched.fullname && errors.fullname && (
-                    <Text style={{fontSize: 12, color: Colors.orange}}>
-                      {errors.fullname}
-                    </Text>
-                  )}
-                </Container>
-                <Container gap={8}>
-                  <Text
-                    style={{
-                      fontSize: 20,
-                      fontWeight: '500',
-                      color: Colors.fonts,
-                    }}>
                     PassWord
                   </Text>
                   <TextInput
@@ -106,7 +75,7 @@ const Signup = () => {
                       borderRadius: 13,
                       color: Colors.fonts,
                     }}
-                    secureTextEntry
+                    secureTextEntry={!showPasswor}
                     placeholder="***********"
                     placeholderTextColor={Colors.fonts}
                     onChangeText={handleChange('password')}
@@ -126,7 +95,7 @@ const Signup = () => {
                       fontWeight: '500',
                       color: Colors.fonts,
                     }}>
-                    Email
+                    Confirm Password
                   </Text>
                   <TextInput
                     style={{
@@ -135,73 +104,16 @@ const Signup = () => {
                       borderRadius: 13,
                       color: Colors.fonts,
                     }}
-                    placeholder="example@example.com"
+                    secureTextEntry
+                    placeholder="***********"
                     placeholderTextColor={Colors.fonts}
-                    onBlur={handleBlur('email')}
-                    value={values.email}
-                    keyboardType="email-address"
+                    onChangeText={handleChange('password')}
+                    onBlur={handleBlur('password')}
+                    value={values.password}
                   />
-                  {touched.email && errors.email && (
+                  {touched.password && errors.password && (
                     <Text style={{fontSize: 12, color: Colors.orange}}>
-                      {errors.email}
-                    </Text>
-                  )}
-                </Container>
-                <Container gap={8}>
-                  <Text
-                    style={{
-                      fontSize: 20,
-                      fontWeight: '500',
-                      color: Colors.fonts,
-                    }}>
-                    Phone
-                  </Text>
-                  <TextInput
-                    style={{
-                      backgroundColor: Colors.yellow2,
-                      paddingHorizontal: 15,
-                      borderRadius: 13,
-                      color: Colors.fonts,
-                    }}
-                    placeholder=" + 123 456 789"
-                    placeholderTextColor={Colors.fonts}
-                    onBlur={handleBlur('phone')}
-                    value={values.phone}
-                    keyboardType="phone-pad"
-                  />
-                  {touched.phone && errors.phone && (
-                    <Text style={{fontSize: 12, color: Colors.orange}}>
-                      {errors.phone}
-                    </Text>
-                  )}
-                </Container>
-                <Container gap={8}>
-                  <Text
-                    style={{
-                      fontSize: 20,
-                      fontWeight: '500',
-                      color: Colors.fonts,
-                    }}>
-                    Date Of Birth
-                  </Text>
-
-                  <TextInput
-                    style={{
-                      backgroundColor: Colors.yellow2,
-                      paddingHorizontal: 15,
-                      borderRadius: 13,
-                      color: Colors.fonts,
-                    }}
-                    placeholder="DD / MM /YYY"
-                    placeholderTextColor={Colors.fonts}
-                    keyboardType="number-pad"
-                    onChangeText={handleChange('dob')}
-                    onBlur={handleBlur('dob')}
-                    value={values.dob}
-                  />
-                  {touched.dob && errors.dob && (
-                    <Text style={{fontSize: 12, color: Colors.orange}}>
-                      {errors.dob}
+                      {errors.password}
                     </Text>
                   )}
                 </Container>
@@ -301,6 +213,6 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Forgetpassword;
 
 const styles = StyleSheet.create({});

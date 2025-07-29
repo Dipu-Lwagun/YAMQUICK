@@ -30,6 +30,9 @@ import IcOnboard1 from './logo/onboard1.png';
 import IcOnboard2 from './logo/onboard2.png';
 import IcOnboard3 from './logo/onboard3.png';
 import icOrder1 from './logo/order1.png';
+import IcGoogle from './logo/Google.png';
+import IcFacebook from './logo/Facebook.png';
+import IcFingerprint from './logo/Fingerprint.png';
 
 export {
   YellowLogo,
@@ -64,4 +67,7 @@ export {
   IcOnboard2,
   IcOnboard3,
   icOrder1,
+  IcGoogle,
+  IcFacebook,
+  IcFingerprint,
 };
