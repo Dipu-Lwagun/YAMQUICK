@@ -26,6 +26,10 @@ import IcSetting from './logo/setting.png';
 import IcLocation from './logo/location.png';
 import IcPayment from './logo/payment.png';
 import IcLogout from './logo/logout.png';
+import IcOnboard1 from './logo/onboard1.png';
+import IcOnboard2 from './logo/onboard2.png';
+import IcOnboard3 from './logo/onboard3.png';
+import icOrder1 from './logo/order1.png';
 
 export {
   YellowLogo,
@@ -56,4 +60,8 @@ export {
   IcLocation,
   IcPayment,
   IcLogout,
+  IcOnboard1,
+  IcOnboard2,
+  IcOnboard3,
+  icOrder1,
 };

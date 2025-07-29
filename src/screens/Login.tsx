@@ -76,6 +76,9 @@ const Login = () => {
             </Text>
           </TouchableOpacity>
         </Container>
+        <Text style={{textAlign: 'center', marginTop: 29}}>
+          or sign up with
+        </Text>
       </View>
     </ScrollView>
   );
